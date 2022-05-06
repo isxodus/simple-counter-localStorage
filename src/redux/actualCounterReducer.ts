@@ -12,7 +12,6 @@ export const actualCounterReducer = (reducerState: ActualCounterType = initialRe
     switch (action.type) {
         case 'INCREASE':
             let currentValueErrorState = (reducerState.currentValue + 1) === reducerState.currentMaxValue
-            console.log(currentValueErrorState, reducerState.currentMaxValue)
             return {
                 ...reducerState, currentValue: reducerState.currentValue + 1, currentValueErrorState: currentValueErrorState
             }

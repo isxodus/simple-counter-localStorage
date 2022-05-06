@@ -1,12 +1,15 @@
 import {combineReducers, createStore} from "redux";
 import {counterSettingsReducer} from "./counterSettingsReducer";
 import {actualCounterReducer} from "./actualCounterReducer";
+import {loadState, saveState} from "./localStorageMethods";
 
 let reducers = combineReducers({
     counterSettingsReducer: counterSettingsReducer,
     actualCounterReducer: actualCounterReducer
 })
-export let store = createStore(reducers) //STORE TYPE
+const persistedState = loadState('state');
+export let store = createStore(reducers, persistedState) //STORE TYPE
+store.subscribe(() => saveState(store.getState()));
 
 //STATE
 export type StateType = {
@@ -40,3 +43,5 @@ export type ActualCounterActionType = {
     defaultValue?: number
     maxValue?: number
 }
+
+
